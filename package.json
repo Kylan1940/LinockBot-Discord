@@ -1,7 +1,7 @@
 {
   "name": "linockbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "LinockBot for Discord",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,8 +10,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.7.1",
-    "dotenv": "^16.0.3",
-    "akinators": "^1.0.0"
-  }
+    "akinators": "^1.0.0",
+    "discord.js": "^14.25.1",
+    "dotenv": "^16.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kylan1940/Linock-Discord.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Kylan1940/Linock-Discord/issues"
+  },
+  "homepage": "https://github.com/Kylan1940/Linock-Discord#readme"
 }

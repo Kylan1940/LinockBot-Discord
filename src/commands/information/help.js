@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js'); //depending on your discord.js version (this example is for v14)
+const { EmbedBuilder } = require('discord.js'); 
 
 module.exports = {
   name: 'help',
