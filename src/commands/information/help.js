@@ -12,20 +12,16 @@ module.exports = {
       .addFields(
         {
           name: '❕ INFORMATION',
-          value: 'help, creator, stats, invitebot',
-          inline: true,
+          value: 'help, creator, invitebot',
+          inline: false,  
         },
         {
-          name: '💻 MODERATOR',
+          name: '💻 MODERATION',
           value: 'kick, ban, timeout',
-          inline: true,
-        },
-        {
-          name: '❔ SUPPORT',
-          value: 'donate',
-          inline: true,
+          inline: false,
         }
       );
+      
 
     interaction.reply({ embeds: [embed] });
     

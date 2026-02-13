@@ -7,33 +7,28 @@ module.exports = {
     
     const embed = new EmbedBuilder()
       .setTitle("LINOCK BOT'S CREATOR")
-      .setDescription("Who's people behind the scenes?")
+      .setDescription("Discover the creator building and maintaining Linock Bot:")
       .setColor('Random')
       .addFields(
         {
           name: 'YOUTUBE',
-          value: '[Click Here](https://www.youtube.com/c/Kylan1940)',
-          inline: true,
+          value: 'Watch on [YouTube](https://www.youtube.com/c/Kylan1940)',
+          inline: false,
         },
         {
-          name: 'INSTAGRAM',
-          value: '[Click Here](https://instagram.com/nx.kyln)',
-          inline: true,
-        },
-        {
-          name: 'TWITTER',
-          value: '[Click Here](https://twitter.com/nx_kyln)',
-          inline: true,
-        },
-        {
-          name: 'DISCORD COMMUNITY',
-          value: '[Click Here](https://dsc.gg/kylancommunity)',
-          inline: true,
+          name: 'GITHUB',
+          value: 'View on [Github](https://github.com/Kylan1940)',
+          inline: false,
         },
         {
           name: 'OFFICIAL WEBSITE',
-          value: '[Click Here](https://direct.kylan1940.site)',
-          inline: true,
+          value: 'Visit [Official Website](https://kylan1940.netlify.app)',
+          inline: false,
+        },
+        {
+          name: 'SUPPORT THE CREATOR',
+          value: 'Support on [Ko-Fi](https://ko-fi.com/kylan1940)',
+          inline: false,
         }
       );
 
