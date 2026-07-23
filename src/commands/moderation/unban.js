@@ -1,49 +1,31 @@
 const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
-  /**
-   *
-   * @param {Client} client
-   * @param {Interaction} interaction
-   */
-  
-  name: 'ban',
-  description: 'Bans a member from this server.',
+  name: 'unban',
+  description: 'Unbans a user from this server.',
   options: [
     {
       name: 'target-user',
-      description: 'The user you want to ban.',
-      type: ApplicationCommandOptionType.Mentionable,
+      description: 'The user ID you want to unban.',
+      type: ApplicationCommandOptionType.String,
       required: true,
     },
     {
       name: 'reason',
-      description: 'The reason you want to ban.',
+      description: 'The reason you want to unban.',
       type: ApplicationCommandOptionType.String,
     },
   ],
   permissionsRequired: [PermissionFlagsBits.BanMembers],
   botPermissions: [PermissionFlagsBits.BanMembers],
+
   callback: async (client, interaction) => {
+
     const targetUserId = interaction.options.get('target-user').value;
     const reason =
       interaction.options.get('reason')?.value || 'No reason provided';
 
     await interaction.deferReply();
-
-    const targetUser = await interaction.guild.members.fetch(targetUserId);
-
-    if (!targetUser) {
-      await interaction.editReply("That user doesn't exist in this server.");
-      return;
-    }
-
-    if (targetUser.id === interaction.guild.ownerId) {
-      await interaction.editReply(
-        "You can't ban that user because they're the server owner."
-      );
-      return;
-    }
 
     const targetUserRolePosition = targetUser.roles.highest.position; 
     const requestUserRolePosition = interaction.member.roles.highest.position; 
@@ -63,15 +45,25 @@ module.exports = {
       return;
     }
 
+    // const bannedUser = await interaction.guild.bans
+    //   .fetch(targetUserId)
+    //   .catch(() => null);
+
+    // if (!bannedUser) {
+    //   await interaction.editReply("That user is not banned.");
+    //   return;
+    // }
+
     try {
-      await targetUser.ban({ reason });
+      await interaction.guild.members.unban(targetUserId, reason);
+
       await interaction.editReply(
-        `User ${targetUser} was banned\nReason: ${reason}`
+        `User <@${targetUserId}> was unbanned.\nReason: ${reason}`
       );
+
     } catch (error) {
-      console.log(`There was an error when banning: ${error}`);
+      console.log(`There was an error when unbanning: ${error}`);
       await interaction.editReply("There was an error while unbanning this user.");
     }
   },
-
 };

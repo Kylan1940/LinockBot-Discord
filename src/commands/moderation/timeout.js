@@ -1,4 +1,4 @@
-const { Client, Interaction, ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
+const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
 const ms = require('ms');
 
 module.exports = {
@@ -33,7 +33,7 @@ module.exports = {
   botPermissions: [PermissionFlagsBits.MuteMembers], 
   callback: async (client, interaction) => {
     const mentionable = interaction.options.get('target-user').value;
-    const duration = interaction.options.get('duration').value; // 1d, 1 day, 1s 5s, 5m
+    const duration = interaction.options.get('duration').value; 
     const reason = interaction.options.get('reason')?.value || 'No reason provided';
 
     await interaction.deferReply();
@@ -60,9 +60,9 @@ module.exports = {
       return;
     }
 
-    const targetUserRolePosition = targetUser.roles.highest.position; // Highest role of the target user
-    const requestUserRolePosition = interaction.member.roles.highest.position; // Highest role of the user running the cmd
-    const botRolePosition = interaction.guild.members.me.roles.highest.position; // Highest role of the bot
+    const targetUserRolePosition = targetUser.roles.highest.position; 
+    const requestUserRolePosition = interaction.member.roles.highest.position; 
+    const botRolePosition = interaction.guild.members.me.roles.highest.position; 
 
     if (targetUserRolePosition >= requestUserRolePosition) {
       await interaction.editReply("You can't timeout that user because they have the same/higher role than you.");
@@ -74,7 +74,6 @@ module.exports = {
       return;
     }
 
-    // Timeout the user
     try {
       const { default: prettyMs } = await import('pretty-ms');
 

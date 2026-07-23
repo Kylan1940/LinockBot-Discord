@@ -24,7 +24,7 @@ client.once('clientReady', (c) => {
       name: '/help | kylan1940.netlify.app',
       type: ActivityType.Watching
     }],
-    status: 'online' // pastikan status online
+    status: 'online' 
   });
 });
 

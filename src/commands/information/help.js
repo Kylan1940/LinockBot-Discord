@@ -17,7 +17,12 @@ module.exports = {
         },
         {
           name: '💻 MODERATION',
-          value: 'kick, ban, timeout',
+          value: 'kick, ban, unban,timeout',
+          inline: false,
+        },
+        {
+          name: '🎮 FUN',
+          value: 'coinflip, rps, tictactoe',
           inline: false,
         }
       );

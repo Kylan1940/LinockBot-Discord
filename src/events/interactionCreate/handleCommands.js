@@ -15,32 +15,29 @@ module.exports = async (client, interaction) => {
 
     if (commandObject.devOnly) {
       if (!devs.includes(interaction.member.id)) {
-        interaction.reply({
+        return await interaction.reply({
           content: 'Only developers are allowed to run this command.',
           ephemeral: true,
         });
-        return;
       }
     }
 
     if (commandObject.testOnly) {
       if (!(interaction.guild.id === testServer)) {
-        interaction.reply({
+        return await interaction.reply({
           content: 'This command cannot be ran here.',
           ephemeral: true,
         });
-        return;
       }
     }
 
     if (commandObject.permissionsRequired?.length) {
       for (const permission of commandObject.permissionsRequired) {
         if (!interaction.member.permissions.has(permission)) {
-          interaction.reply({
+          return await interaction.reply({
             content: 'Not enough permissions.',
             ephemeral: true,
           });
-          return;
         }
       }
     }
@@ -50,17 +47,24 @@ module.exports = async (client, interaction) => {
         const bot = interaction.guild.members.me;
 
         if (!bot.permissions.has(permission)) {
-          interaction.reply({
+          return await interaction.reply({
             content: "I don't have enough permissions.",
             ephemeral: true,
           });
-          return;
         }
       }
     }
 
     await commandObject.callback(client, interaction);
+
   } catch (error) {
     console.log(`There was an error running this command: ${error}`);
+
+    if (!interaction.replied && !interaction.deferred) {
+      await interaction.reply({
+        content: 'There was an error while running this command.',
+        ephemeral: true,
+      });
+    }
   }
 };
