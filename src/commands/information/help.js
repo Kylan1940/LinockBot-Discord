@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js'); //depending on your discord.js version (this example is for v14)
+const { EmbedBuilder } = require('discord.js'); 
 
 module.exports = {
   name: 'help',
@@ -12,20 +12,31 @@ module.exports = {
       .addFields(
         {
           name: '❕ INFORMATION',
-          value: 'help, creator, stats, invitebot',
-          inline: true,
+          value: 'help, creator, invitebot',
+          inline: false,  
         },
         {
-          name: '💻 MODERATOR',
-          value: 'kick, ban, timeout',
-          inline: true,
+          name: '💻 MODERATION',
+          value: 'kick, ban, unban,timeout',
+          inline: false,
         },
         {
-          name: '❔ SUPPORT',
-          value: 'donate',
-          inline: true,
-        }
+          name: '🎮 FUN',
+          value: 'coinflip, rps, tictactoe',
+          inline: false,
+        },
+        {
+          name: '😂 MEME',
+          value: 'meme',
+          inline: false,
+        },
+        {
+          name: '🎵 MUSIC',
+          value: 'play, pause, resume, skip, stop, queue, nowplaying',
+          inline: false,
+        },
       );
+      
 
     interaction.reply({ embeds: [embed] });
     

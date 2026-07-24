@@ -1,14 +1,33 @@
 require('dotenv').config();
-const { Client, GatewayIntentBits, Partials, ActivityType } = require('discord.js');
+const { 
+  Client, 
+  GatewayIntentBits, 
+  Partials, 
+  ActivityType
+} = require('discord.js');
+
 const eventHandler = require('./handlers/eventHandler');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds], partials: [Partials.Channel] });
+const client = new Client({ 
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.MessageContent
+  ], 
+  partials: [Partials.Channel] 
+});
 
-client.on('ready', (c) => {
+client.once('clientReady', (c) => {
   console.log(`✅ ${c.user.tag} is online.`);
 
-  client.user.setActivity('/help | web.kylan1940.site', {
-    type: 'WATCHING'
+  client.user.setPresence({
+    activities: [{
+      name: '/help | kylan1940.netlify.app',
+      type: ActivityType.Watching
+    }],
+    status: 'online' 
   });
 });
 
