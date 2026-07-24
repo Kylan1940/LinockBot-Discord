@@ -17,7 +17,7 @@ module.exports = async (client, interaction) => {
       if (!devs.includes(interaction.member.id)) {
         return await interaction.reply({
           content: 'Only developers are allowed to run this command.',
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
     }
@@ -26,7 +26,7 @@ module.exports = async (client, interaction) => {
       if (!(interaction.guild.id === testServer)) {
         return await interaction.reply({
           content: 'This command cannot be ran here.',
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
     }
@@ -36,7 +36,7 @@ module.exports = async (client, interaction) => {
         if (!interaction.member.permissions.has(permission)) {
           return await interaction.reply({
             content: 'Not enough permissions.',
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
           });
         }
       }
@@ -49,7 +49,7 @@ module.exports = async (client, interaction) => {
         if (!bot.permissions.has(permission)) {
           return await interaction.reply({
             content: "I don't have enough permissions.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
           });
         }
       }
@@ -63,7 +63,7 @@ module.exports = async (client, interaction) => {
     if (!interaction.replied && !interaction.deferred) {
       await interaction.reply({
         content: 'There was an error while running this command.',
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
   }

@@ -24,7 +24,17 @@ module.exports = {
           name: '🎮 FUN',
           value: 'coinflip, rps, tictactoe',
           inline: false,
-        }
+        },
+        {
+          name: '😂 MEME',
+          value: 'meme',
+          inline: false,
+        },
+        {
+          name: '🎵 MUSIC',
+          value: 'play, pause, resume, skip, stop, queue, nowplaying',
+          inline: false,
+        },
       );
       
 

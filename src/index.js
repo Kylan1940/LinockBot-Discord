@@ -3,7 +3,7 @@ const {
   Client, 
   GatewayIntentBits, 
   Partials, 
-  ActivityType 
+  ActivityType
 } = require('discord.js');
 
 const eventHandler = require('./handlers/eventHandler');
@@ -11,7 +11,10 @@ const eventHandler = require('./handlers/eventHandler');
 const client = new Client({ 
   intents: [
     GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers // tambahkan ini
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.MessageContent
   ], 
   partials: [Partials.Channel] 
 });

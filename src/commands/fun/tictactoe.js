@@ -11,7 +11,7 @@ module.exports = {
         if (games.has(interaction.user.id)) {
             return interaction.reply({
                 content: "You already have an active game!",
-                ephemeral: true
+                flags: MessageFlags.Ephemeral
             });
         }
 
@@ -44,7 +44,7 @@ module.exports = {
             if (button.user.id !== interaction.user.id) {
                 return button.reply({
                     content: "This is not your game!",
-                    ephemeral: true
+                    flags: MessageFlags.Ephemeral
                 });
             }
 
