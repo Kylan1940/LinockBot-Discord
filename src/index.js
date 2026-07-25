@@ -5,6 +5,8 @@ const {
   Partials, 
   ActivityType
 } = require('discord.js');
+const { Player } = require('discord-player');
+const { DefaultExtractors } = require('@discord-player/extractor');
 
 const eventHandler = require('./handlers/eventHandler');
 
@@ -19,8 +21,17 @@ const client = new Client({
   partials: [Partials.Channel] 
 });
 
-client.once('clientReady', (c) => {
+client.player = new Player(client);
+
+client.once('ready', async (c) => {
   console.log(`✅ ${c.user.tag} is online.`);
+
+  try {
+    await client.player.extractors.loadMulti(DefaultExtractors);
+    console.log('✅ Music extractors loaded.');
+  } catch (err) {
+    console.error('❌ Failed to load extractors:', err.message);
+  }
 
   client.user.setPresence({
     activities: [{

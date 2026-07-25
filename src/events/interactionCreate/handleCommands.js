@@ -1,3 +1,4 @@
+const { MessageFlags } = require('discord.js');
 const { devs, testServer } = require('../../../config.json');
 const getLocalCommands = require('../../utils/getLocalCommands');
 
@@ -12,6 +13,13 @@ module.exports = async (client, interaction) => {
     );
 
     if (!commandObject) return;
+
+    if (!interaction.inGuild() || !interaction.member) {
+      return await interaction.reply({
+        content: 'This command can only be used inside a server.',
+        flags: MessageFlags.Ephemeral,
+      });
+    }
 
     if (commandObject.devOnly) {
       if (!devs.includes(interaction.member.id)) {
@@ -33,7 +41,7 @@ module.exports = async (client, interaction) => {
 
     if (commandObject.permissionsRequired?.length) {
       for (const permission of commandObject.permissionsRequired) {
-        if (!interaction.member.permissions.has(permission)) {
+        if (!interaction.member.permissions?.has(permission)) {
           return await interaction.reply({
             content: 'Not enough permissions.',
             flags: MessageFlags.Ephemeral,
@@ -44,9 +52,9 @@ module.exports = async (client, interaction) => {
 
     if (commandObject.botPermissions?.length) {
       for (const permission of commandObject.botPermissions) {
-        const bot = interaction.guild.members.me;
+        const bot = interaction.guild?.members?.me;
 
-        if (!bot.permissions.has(permission)) {
+        if (!bot?.permissions?.has(permission)) {
           return await interaction.reply({
             content: "I don't have enough permissions.",
             flags: MessageFlags.Ephemeral,
