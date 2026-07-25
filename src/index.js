@@ -5,8 +5,11 @@ const {
   Partials, 
   ActivityType
 } = require('discord.js');
+<<<<<<< HEAD
 const { Player } = require('discord-player');
 const { DefaultExtractors } = require('@discord-player/extractor');
+=======
+>>>>>>> main
 
 const eventHandler = require('./handlers/eventHandler');
 
@@ -21,6 +24,7 @@ const client = new Client({
   partials: [Partials.Channel] 
 });
 
+<<<<<<< HEAD
 client.player = new Player(client);
 
 client.once('ready', async (c) => {
@@ -33,6 +37,11 @@ client.once('ready', async (c) => {
     console.error('❌ Failed to load extractors:', err.message);
   }
 
+=======
+client.once('clientReady', (c) => {
+  console.log(`✅ ${c.user.tag} is online.`);
+
+>>>>>>> main
   client.user.setPresence({
     activities: [{
       name: '/help | kylan1940.netlify.app',

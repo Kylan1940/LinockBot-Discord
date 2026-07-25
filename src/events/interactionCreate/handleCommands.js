@@ -41,7 +41,11 @@ module.exports = async (client, interaction) => {
 
     if (commandObject.permissionsRequired?.length) {
       for (const permission of commandObject.permissionsRequired) {
+<<<<<<< HEAD
         if (!interaction.member.permissions?.has(permission)) {
+=======
+        if (!interaction.member.permissions.has(permission)) {
+>>>>>>> main
           return await interaction.reply({
             content: 'Not enough permissions.',
             flags: MessageFlags.Ephemeral,
@@ -54,7 +58,11 @@ module.exports = async (client, interaction) => {
       for (const permission of commandObject.botPermissions) {
         const bot = interaction.guild?.members?.me;
 
+<<<<<<< HEAD
         if (!bot?.permissions?.has(permission)) {
+=======
+        if (!bot.permissions.has(permission)) {
+>>>>>>> main
           return await interaction.reply({
             content: "I don't have enough permissions.",
             flags: MessageFlags.Ephemeral,
