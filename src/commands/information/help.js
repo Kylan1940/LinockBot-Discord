@@ -17,7 +17,7 @@ module.exports = {
         },
         {
           name: '💻 MODERATION',
-          value: 'kick, ban, unban,timeout',
+          value: 'kick, ban, unban, timeout, clearchat',
           inline: false,
         },
         {
