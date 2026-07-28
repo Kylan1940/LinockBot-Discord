@@ -26,7 +26,12 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle("❌ Tic Tac Toe")
             .setDescription(renderBoard(game.board) +"\n\nYour turn!")
-            .setColor("Random");
+            .setColor("Random")
+            .setFooter({
+                text: `${client.user.username} • Requested by ${interaction.user.tag}`,
+                iconURL: client.user.displayAvatarURL(),
+            })
+            .setTimestamp();
 
         await interaction.reply({
             embeds: [embed],
@@ -80,6 +85,11 @@ module.exports = {
                         .setTitle("❌ Tic Tac Toe")
                         .setDescription(renderBoard(game.board) +"\n\nYour turn!")
                         .setColor("Random")
+                        .setFooter({
+                            text: `${client.user.username} • Requested by ${interaction.user.tag}`,
+                            iconURL: client.user.displayAvatarURL(),
+                        })
+                        .setTimestamp()
                 ],
                 components: createButtons()
             });

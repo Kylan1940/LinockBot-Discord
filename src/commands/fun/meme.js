@@ -16,6 +16,7 @@ module.exports = {
                 .setFooter({
                     text: `👍 ${data.ups} | r/${data.subreddit}`
                 })
+                .setTimestamp()
                 .setColor("Random");
 
             await interaction.reply({

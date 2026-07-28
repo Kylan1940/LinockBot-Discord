@@ -73,7 +73,12 @@ module.exports = {
                     name: "Result",
                     value: result
                 }
-            );
+            )
+            .setFooter({
+                text: `${client.user.username} • Requested by ${interaction.user.tag}`,
+                iconURL: client.user.displayAvatarURL(),
+            })
+            .setTimestamp();
 
         await interaction.reply({embeds: [embed]});
     }

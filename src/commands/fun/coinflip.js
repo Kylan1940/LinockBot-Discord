@@ -19,8 +19,10 @@ module.exports = {
                 }
             )
             .setFooter({
-                text: `Flipped by ${interaction.user.username}`
-            });
+                text: `Flipped by ${interaction.user.username}`,
+                iconURL: interaction.user.displayAvatarURL(),
+            })
+            .setTimestamp();
 
         await interaction.reply({embeds: [embed]});
     }
