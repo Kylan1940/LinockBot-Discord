@@ -1,6 +1,6 @@
-const { MessageFlags } = require('discord.js');
-const { devs, testServer } = require('../../../config.json');
-const getLocalCommands = require('../../utils/getLocalCommands');
+const { MessageFlags } = require("discord.js");
+const { devs, testServer } = require("../../../config.json");
+const getLocalCommands = require("../../utils/getLocalCommands");
 
 module.exports = async (client, interaction) => {
   if (!interaction.isChatInputCommand()) return;
@@ -9,14 +9,14 @@ module.exports = async (client, interaction) => {
 
   try {
     const commandObject = localCommands.find(
-      (cmd) => cmd.name === interaction.commandName
+      (cmd) => cmd.name === interaction.commandName,
     );
 
     if (!commandObject) return;
 
     if (!interaction.inGuild() || !interaction.member) {
       return await interaction.reply({
-        content: 'This command can only be used inside a server.',
+        content: "This command can only be used inside a server.",
         flags: MessageFlags.Ephemeral,
       });
     }
@@ -24,7 +24,7 @@ module.exports = async (client, interaction) => {
     if (commandObject.devOnly) {
       if (!devs.includes(interaction.member.id)) {
         return await interaction.reply({
-          content: 'Only developers are allowed to run this command.',
+          content: "Only developers are allowed to run this command.",
           flags: MessageFlags.Ephemeral,
         });
       }
@@ -33,7 +33,7 @@ module.exports = async (client, interaction) => {
     if (commandObject.testOnly) {
       if (!(interaction.guild.id === testServer)) {
         return await interaction.reply({
-          content: 'This command cannot be ran here.',
+          content: "This command cannot be ran here.",
           flags: MessageFlags.Ephemeral,
         });
       }
@@ -43,7 +43,7 @@ module.exports = async (client, interaction) => {
       for (const permission of commandObject.permissionsRequired) {
         if (!interaction.member.permissions?.has(permission)) {
           return await interaction.reply({
-            content: 'Not enough permissions.',
+            content: "Not enough permissions.",
             flags: MessageFlags.Ephemeral,
           });
         }
@@ -64,13 +64,12 @@ module.exports = async (client, interaction) => {
     }
 
     await commandObject.callback(client, interaction);
-
   } catch (error) {
     console.log(`There was an error running this command: ${error}`);
 
     if (!interaction.replied && !interaction.deferred) {
       await interaction.reply({
-        content: 'There was an error while running this command.',
+        content: "There was an error while running this command.",
         flags: MessageFlags.Ephemeral,
       });
     }

@@ -1,4 +1,7 @@
-const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
+const {
+  ApplicationCommandOptionType,
+  PermissionFlagsBits,
+} = require("discord.js");
 
 module.exports = {
   /**
@@ -6,28 +9,28 @@ module.exports = {
    * @param {Client} client
    * @param {Interaction} interaction
    */
-  
-  name: 'ban',
-  description: 'Bans a member from this server.',
+
+  name: "ban",
+  description: "Bans a member from this server.",
   options: [
     {
-      name: 'target-user',
-      description: 'The user you want to ban.',
+      name: "target-user",
+      description: "The user you want to ban.",
       type: ApplicationCommandOptionType.Mentionable,
       required: true,
     },
     {
-      name: 'reason',
-      description: 'The reason you want to ban.',
+      name: "reason",
+      description: "The reason you want to ban.",
       type: ApplicationCommandOptionType.String,
     },
   ],
   permissionsRequired: [PermissionFlagsBits.BanMembers],
   botPermissions: [PermissionFlagsBits.BanMembers],
   callback: async (client, interaction) => {
-    const targetUserId = interaction.options.get('target-user').value;
+    const targetUserId = interaction.options.get("target-user").value;
     const reason =
-      interaction.options.get('reason')?.value || 'No reason provided';
+      interaction.options.get("reason")?.value || "No reason provided";
 
     await interaction.deferReply();
 
@@ -40,25 +43,25 @@ module.exports = {
 
     if (targetUser.id === interaction.guild.ownerId) {
       await interaction.editReply(
-        "You can't ban that user because they're the server owner."
+        "You can't ban that user because they're the server owner.",
       );
       return;
     }
 
-    const targetUserRolePosition = targetUser.roles.highest.position; 
-    const requestUserRolePosition = interaction.member.roles.highest.position; 
-    const botRolePosition = interaction.guild.members.me.roles.highest.position; 
+    const targetUserRolePosition = targetUser.roles.highest.position;
+    const requestUserRolePosition = interaction.member.roles.highest.position;
+    const botRolePosition = interaction.guild.members.me.roles.highest.position;
 
     if (targetUserRolePosition >= requestUserRolePosition) {
       await interaction.editReply(
-        "You can't ban that user because they have the same/higher role than you."
+        "You can't ban that user because they have the same/higher role than you.",
       );
       return;
     }
 
     if (targetUserRolePosition >= botRolePosition) {
       await interaction.editReply(
-        "I can't ban that user because they have the same/higher role than me."
+        "I can't ban that user because they have the same/higher role than me.",
       );
       return;
     }
@@ -66,12 +69,13 @@ module.exports = {
     try {
       await targetUser.ban({ reason });
       await interaction.editReply(
-        `User ${targetUser} was banned\nReason: ${reason}`
+        `User ${targetUser} was banned\nReason: ${reason}`,
       );
     } catch (error) {
       console.log(`There was an error when banning: ${error}`);
-      await interaction.editReply("There was an error while unbanning this user.");
+      await interaction.editReply(
+        "There was an error while unbanning this user.",
+      );
     }
   },
-
 };

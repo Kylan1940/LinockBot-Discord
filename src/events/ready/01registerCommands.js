@@ -1,21 +1,21 @@
-const { testServer } = require('../../../config.json');
-const areCommandsDifferent = require('../../utils/areCommandsDifferent');
-const getApplicationCommands = require('../../utils/getApplicationCommands');
-const getLocalCommands = require('../../utils/getLocalCommands');
+const { testServer } = require("../../../config.json");
+const areCommandsDifferent = require("../../utils/areCommandsDifferent");
+const getApplicationCommands = require("../../utils/getApplicationCommands");
+const getLocalCommands = require("../../utils/getLocalCommands");
 
 module.exports = async (client) => {
   try {
     const localCommands = getLocalCommands();
     const applicationCommands = await getApplicationCommands(
       client,
-      testServer
+      testServer,
     );
 
     for (const localCommand of localCommands) {
       const { name, description, options } = localCommand;
 
       const existingCommand = await applicationCommands.cache.find(
-        (cmd) => cmd.name === name
+        (cmd) => cmd.name === name,
       );
 
       if (existingCommand) {
@@ -36,7 +36,7 @@ module.exports = async (client) => {
       } else {
         if (localCommand.deleted) {
           console.log(
-            `⏩ Skipping registering command "${name}" as it's set to delete.`
+            `⏩ Skipping registering command "${name}" as it's set to delete.`,
           );
           continue;
         }

@@ -1,75 +1,66 @@
 class GuildQueue {
+  constructor({ guild, connection, player, textChannel, voiceChannel }) {
+    this.guild = guild;
 
-    constructor({
-        guild,
-        connection,
-        player,
-        textChannel,
-        voiceChannel
-    }) {
+    this.connection = connection;
 
-        this.guild = guild;
+    this.player = player;
 
-        this.connection = connection;
+    this.textChannel = textChannel;
 
-        this.player = player;
+    this.voiceChannel = voiceChannel;
 
-        this.textChannel = textChannel;
+    /**
+     * Song Queue
+     */
+    this.songs = [];
 
-        this.voiceChannel = voiceChannel;
+    /**
+     * Current Song
+     */
+    this.current = null;
 
-        /**
-         * Song Queue
-         */
-        this.songs = [];
+    /**
+     * Player State
+     */
+    this.playing = false;
 
-        /**
-         * Current Song
-         */
-        this.current = null;
+    this.paused = false;
 
-        /**
-         * Player State
-         */
-        this.playing = false;
+    /**
+     * Settings
+     */
+    this.volume = 100;
 
-        this.paused = false;
+    this.loop = false;
 
-        /**
-         * Settings
-         */
-        this.volume = 100;
+    this.shuffle = false;
 
-        this.loop = false;
+    /**
+     * Disconnect Timer
+     */
+    this.timeout = null;
+  }
 
-        this.shuffle = false;
+  addSong(song) {
+    this.songs.push(song);
+  }
 
-        /**
-         * Disconnect Timer
-         */
-        this.timeout = null;
-    }
+  nextSong() {
+    return this.songs.shift();
+  }
 
-    addSong(song) {
-        this.songs.push(song);
-    }
+  peek() {
+    return this.songs[0];
+  }
 
-    nextSong() {
-        return this.songs.shift();
-    }
+  clear() {
+    this.songs = [];
+  }
 
-    peek() {
-        return this.songs[0];
-    }
-
-    clear() {
-        this.songs = [];
-    }
-
-    isEmpty() {
-        return this.songs.length === 0;
-    }
-
+  isEmpty() {
+    return this.songs.length === 0;
+  }
 }
 
 module.exports = GuildQueue;

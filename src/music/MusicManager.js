@@ -1,54 +1,52 @@
 class MusicManager {
-
-    constructor() {
-        /**
-         * Key = Guild ID
-         * Value = GuildQueue
-         */
-        this.queues = new Map();
-    }
-
+  constructor() {
     /**
-     * Create queue
-     * @param {string} guildId
-     * @param {GuildQueue} queue
+     * Key = Guild ID
+     * Value = GuildQueue
      */
-    create(guildId, queue) {
-        this.queues.set(guildId, queue);
-        return queue;
-    }
+    this.queues = new Map();
+  }
 
-    /**
-     * Get queue
-     * @param {string} guildId
-     */
-    get(guildId) {
-        return this.queues.get(guildId);
-    }
+  /**
+   * Create queue
+   * @param {string} guildId
+   * @param {GuildQueue} queue
+   */
+  create(guildId, queue) {
+    this.queues.set(guildId, queue);
+    return queue;
+  }
 
-    /**
-     * Has queue
-     * @param {string} guildId
-     */
-    has(guildId) {
-        return this.queues.has(guildId);
-    }
+  /**
+   * Get queue
+   * @param {string} guildId
+   */
+  get(guildId) {
+    return this.queues.get(guildId);
+  }
 
-    /**
-     * Delete queue
-     * @param {string} guildId
-     */
-    delete(guildId) {
-        this.queues.delete(guildId);
-    }
+  /**
+   * Has queue
+   * @param {string} guildId
+   */
+  has(guildId) {
+    return this.queues.has(guildId);
+  }
 
-    /**
-     * Get all queues
-     */
-    all() {
-        return this.queues;
-    }
+  /**
+   * Delete queue
+   * @param {string} guildId
+   */
+  delete(guildId) {
+    this.queues.delete(guildId);
+  }
 
+  /**
+   * Get all queues
+   */
+  all() {
+    return this.queues;
+  }
 }
 
 module.exports = new MusicManager();
